@@ -1,5 +1,6 @@
 const express = require('express'); /* Acesso ao express no package.json */
 const cors = require('cors'); /* Sistema de segurança que define quem pode acessar a aplicação */
+const { errors } = require('celebrate');
 const routes = require('./routes'); /* Importando o arquivo de rotas. o './' serve para referenciar a mesma pasta e indicar que rotas não é um pacote e sim um arquivo */
 
 const app = express(); /* criando variavel que vai armazenar a aplicação */
@@ -9,6 +10,10 @@ app.use(cors()); /* Em produção colocar o caminho que pode acessar app.use(cor
 app.use(express.json()); /* Para que sera reconhecido o formato Json na aplicação */
 
 app.use(routes); /* sempre abaixo do "app.use(express.json());" */
+
+app.use(errors());
+
+module.exports = app;
 
 /** 
  * Criando a rotas 
@@ -53,5 +58,7 @@ app.post('/users', (request, response) =>{
     });
 });
 */
-app.listen(3333); /* Tendo acesso a porta 3333 para navegação no browser */
+
+
+//app.listen(3333); /* Tendo acesso a porta 3333 para navegação no browser */
 

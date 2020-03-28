@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const generateUniqueId = require('../utils/generateUniqueId');
 const connection = require('../database/connection');
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
 
         //const data = request.body;
         const { name, email, whatsapp, city, uf } = request.body; //pode ser feito assim para acessar diretamente pela variavel
-        const id = crypto.randomBytes(4).toString('HEX'); // somente no caso que não exista auto incremento e queira fazer algum tipo de senha
+        const id = generateUniqueId();
 
         await connection('ongs').insert({
             id,
